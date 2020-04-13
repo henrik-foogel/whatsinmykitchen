@@ -5,6 +5,8 @@ import MeasurementList from './MeasurementList';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ImageUploader from 'react-images-upload';
+import image2base64 from 'image-to-base64';
+import ShowImage from './ShowImage'
 
 const NewGroceryForm = () => {
     const { dispatch } = useContext(GroceryContext);
@@ -16,6 +18,7 @@ const NewGroceryForm = () => {
     const [measurement, setMeasurement] = useState('');
     const [quantity, setQuantity] = useState('');
     const [image, setImage] = useState('');
+    const [base64, setBase64] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch({
@@ -44,19 +47,30 @@ const NewGroceryForm = () => {
     }
     const handleQuantity = (e) => {
         setAmount(e);
-        let together = (amount+measurement)
+        let together = (amount + measurement)
         console.log(together)
         setQuantity(together)
     }
     const handleImage = (image) => {
         console.log(image)
-        setImage(image);
+        image2base64(image)
+            .then(
+                (response) => {
+                    console.log(response);
+                    setBase64(response);
+                }
+            )
+            .catch(
+                (error) => {
+                    console.log(error);
+                }
+            )
     }
     return (
         <form onSubmit={handleSubmit}>
             <input type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} required />
             <div className="amount-container">
-                <input type="text" placeholder="amount" onChange={(e) => {setAmount(e.target.value)}} required value={amount} />
+                <input type="text" placeholder="amount" onChange={(e) => { setAmount(e.target.value) }} required value={amount} />
                 <MeasurementList handleMeasurement={handleMeasurement} value={measurement} required />
             </div>
             <DatePicker placeholderText="buy date" dateFormat="yyyy/MM/dd" selected={buyDate} onChange={handleBuyDate} />
@@ -70,6 +84,7 @@ const NewGroceryForm = () => {
                 maxFileSize={5242880}
             />
             <input onClick={handleQuantity} type="submit" value="add grocery" />
+            <ShowImage base64={base64}/>
         </form>
     );
 }
