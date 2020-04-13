@@ -1,0 +1,21 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 0;
+    
+    h1 {
+        width: 100%;
+    }
+    
+    ul {
+        display: flex;
+        justify-content: space-evenly;
+        list-style: none;
+        width: 100%;
+        
+        li {
+            font-size: 1.5rem;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+.light-nav {
+  background: #ddd;
+  color: #555;
+}
+
+.light-nav a {
+  color: #555;
+}
+
+.light-nav a:hover {
+  opacity: .7;
+}
+
+.dark-nav {
+  background: #333;
+  color: #ddd;
+}
+
+.dark-nav a {
+  color: #ddd;
+}
+
+.dark-nav a:hover {
+  opacity: .7;
+}
+
+.light {
+  background: #eee;
+  color: #555;
+}
+
+.dark {
+  background: #555;
+  color: #ddd;
+}
+/*# sourceMappingURL=theme.css.map */

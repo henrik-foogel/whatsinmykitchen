@@ -1,0 +1,32 @@
+.list-container, .empty {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+
+}
+
+.list-container {
+
+    ul {
+        background: $main-orange;
+        list-style: none;
+        padding: 1rem 2rem;
+        border-radius: .5rem;
+        width: 30rem;
+        max-width: 100%;
+        font-size: 1.5rem;
+
+        li {
+            display: flex;
+
+            
+            div {
+                &:nth-child(even) {
+                    color: #fff;
+                }
+
+                margin: 0 .5rem
+            }
+        }
+    }
+}

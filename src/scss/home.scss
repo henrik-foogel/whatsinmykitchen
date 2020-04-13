@@ -1,0 +1,58 @@
+.home-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: $main-orange;
+    padding: 3rem 1rem 2.5rem;
+    border-radius: 0.2rem;
+    width: 15rem;
+    max-width: 100%;
+
+    .amount-container {
+      display: flex;
+
+      input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 1px solid #ccc;
+        width: 6.5rem;
+      }
+
+      select {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: 4rem;
+      }
+    }
+
+    p {
+      margin: 0 0 0.2rem;
+      text-align: left;
+    }
+
+    input,
+    select {
+      border-radius: 0.5rem;
+      border: none;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    select {
+      width: 75%;
+    }
+  }
+}

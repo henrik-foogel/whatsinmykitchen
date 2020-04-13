@@ -1,0 +1,30 @@
+$bg-light: #eee;
+$bg-dark: #555;
+
+$ui-light: #ddd;
+$ui-dark: #333;
+
+$syntax-light: #555;
+
+$main-orange: #c76e33;
+$secondary-orange: #f18c48;
+$very-light-gray: rgb(211, 211, 211);
+$syntax: #ddd;
+
+.navbar {
+    background: $main-orange;
+    color: $very-light-gray;
+    
+    a {
+        color: $syntax;
+        
+        &:hover {
+            opacity: .7;
+        }
+    }
+}
+
+.App {
+    background: $secondary-orange;
+    // color: $syntax-dark;
+}
