@@ -1,21 +1,12 @@
-import React, { useContext } from 'react';
-import { GroceryContext } from '../contexts/GroceryContext';
-import GroceryDetails from './GroceryDetails';
+import React from 'react';
+import GroceryDetailsContainer from './GroceryDetailsContainer';
 
 const Cupboard = () => {
-    const { groceries } = useContext(GroceryContext)
-    return groceries.length ? (
-        <div className="cupboard list-container">
-            <ul>
-                {groceries.map(grocery => {
-                    if(grocery.where === 'cupboard')
-                    return (<GroceryDetails grocery={grocery} key={grocery.id} />)
-                })}
-            </ul>
+    return (
+        <div className="cupboard details-container">
+            <GroceryDetailsContainer where={'cupboard'}/>
         </div>
-    ) : (
-            <div className="empty">Nothing to eat. You will starve!</div>
-        )
+    )
 }
 
 export default Cupboard;

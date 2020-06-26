@@ -1,5 +1,3 @@
-import { v4 as uuid } from 'uuid';
-
 export const groceryReducer = (state, action) => {
     switch (action.type) {
         case 'ADD_GROCERY':
@@ -9,10 +7,11 @@ export const groceryReducer = (state, action) => {
             where: action.grocery.where,
             buyDate: action.grocery.buyDate,
             exDate: action.grocery.exDate,
-            id: uuid()
+            image: '',
+            id: action.grocery.id
         }]
         case 'REMOVE_GROCERY':
-        return state.filter(g => g.id !== action.grocery.id)
+        return state.filter(g => g.id !== action.id)
         default:
             return state
     }
