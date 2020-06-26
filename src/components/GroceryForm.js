@@ -5,8 +5,8 @@ import MeasurementList from './MeasurementList';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ImageUploader from 'react-images-upload';
-import image2base64 from 'image-to-base64';
-import ShowImage from './ShowImage'
+import firebase from "../firebase-config";
+import { v4 as uuid } from 'uuid';
 
 const NewGroceryForm = () => {
     const { dispatch } = useContext(GroceryContext);
@@ -18,20 +18,44 @@ const NewGroceryForm = () => {
     const [measurement, setMeasurement] = useState('');
     const [quantity, setQuantity] = useState('');
     const [image, setImage] = useState('');
-    const [base64, setBase64] = useState('');
+    const [imageType, setImageType] = useState('');
+    const [id, setId] = useState('');
+    const db = firebase.firestore();
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch({
-            type: 'ADD_GROCERY', grocery: {
-                name, quantity, where, buyDate, exDate
-            }
-        });
-        setName('');
-        setAmount('');
-        setWhere('');
-        setBuyDate('');
-        setExDate('');
-        setQuantity('');
+
+        if (where === '' || buyDate === '' || exDate === '') {
+            return
+        } else {
+
+            console.log(id)
+
+            const groceryList = db.collection('grocery-list').add({
+                name: name,
+                amount: quantity,
+                where: where,
+                buyDate: buyDate,
+                exDate: exDate,
+                image: '',
+                id: id
+            })
+            dispatch({
+                type: 'ADD_GROCERY', grocery: {
+                    name, quantity, where, buyDate, exDate, image, id
+                }
+            });
+
+            // uploadImageToFirebase();
+
+            setName('');
+            setAmount('');
+            setWhere('');
+            setBuyDate('');
+            setExDate('');
+            setQuantity('');
+            setImage('');
+        }
     }
     const handleWhere = (where) => {
         setWhere(where);
@@ -40,31 +64,30 @@ const NewGroceryForm = () => {
         setMeasurement(measurement);
     }
     const handleBuyDate = (date) => {
+        if (where === '') { setWhere('cupboard'); }
         setBuyDate(date);
     }
     const handleExDate = (date) => {
+        setId(uuid());
         setExDate(date);
     }
     const handleQuantity = (e) => {
         setAmount(e);
         let together = (amount + measurement)
-        console.log(together)
         setQuantity(together)
     }
-    const handleImage = (image) => {
-        console.log(image)
-        image2base64(image)
-            .then(
-                (response) => {
-                    console.log(response);
-                    setBase64(response);
-                }
-            )
-            .catch(
-                (error) => {
-                    console.log(error);
-                }
-            )
+    const handleImage = img => {
+        setImageType(img[0].type);
+        setImage(img);
+    }
+    async function uploadImageToFirebase() {
+        const ref = firebase.storage().ref();
+
+        await ref.put(image[0])
+            .then(function (snapshot) {
+                console.log('Uploaded a blob or file!');
+            })
+            // .catch(err => console.log(err));
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -76,15 +99,17 @@ const NewGroceryForm = () => {
             <DatePicker placeholderText="buy date" dateFormat="yyyy/MM/dd" selected={buyDate} onChange={handleBuyDate} />
             <DatePicker placeholderText="experation date" dateFormat="yyyy/MM/dd" selected={exDate} onChange={handleExDate} />
             <WhereList handleWhere={handleWhere} />
-            <ImageUploader
+            {/* <ImageUploader
+                accept='"accept=image/*"'
+                withPreview={true}
+                singleImage={true}
                 withIcon={false}
                 buttonText='Choose images'
                 onChange={handleImage}
                 imgExtension={['.jpg', '.gif', '.png', '.gif']}
                 maxFileSize={5242880}
-            />
+            /> */}
             <input onClick={handleQuantity} type="submit" value="add grocery" />
-            <ShowImage base64={base64}/>
         </form>
     );
 }
