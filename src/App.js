@@ -6,6 +6,7 @@ import Cupboard from './components/Cupboard';
 import Fridge from './components/Fridge';
 import Freezer from './components/Freezer';
 import Spices from './components/Spices';
+import Login from './components/Login';
 import GroceryContextProvider from './contexts/GroceryContext';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route exact path="/fridge" component={Fridge} />
             <Route exact path="/freezer" component={Freezer} />
             <Route exact path="/spices" component={Spices} />
+            <Route exact path="/login" component={Login} />
           </GroceryContextProvider>
         </Switch>
       </div>

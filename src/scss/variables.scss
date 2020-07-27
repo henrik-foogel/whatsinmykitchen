@@ -1,3 +1,17 @@
-.button {
+.button, .amount-select {
     cursor: pointer;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 1rem;
+    box-shadow:  2px 2px 5px -4px rgba(0,0,0,0.87);
+}
+
+input[type=email], input[type=password], input[type=text], .amount-select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
