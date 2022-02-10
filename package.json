@@ -21,7 +21,7 @@
     "fs-react": "0.0.4",
     "image-downloader": "^3.5.0",
     "image-to-base64": "^2.0.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-datepicker": "^2.14.1",
     "react-dom": "^16.13.1",
